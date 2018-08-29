@@ -1,0 +1,69 @@
+﻿@model RasmedTestEngine.Website.Models.Support
+@using Recaptcha.Web.Mvc;
+@{
+    ViewBag.Title = "Support";
+}
+
+<div class="account-container">
+
+    <div class="content clearfix">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <h1>@ViewBag.Title</h1>
+            <div class="login-fields">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="field">
+                    @Html.LabelFor(model => model.Name)
+
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="field">
+                    @Html.LabelFor(model => model.Email)
+
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="field">
+                    @Html.LabelFor(model => model.MobileNumber)
+
+                    @Html.EditorFor(model => model.MobileNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="field">
+                    @Html.LabelFor(model => model.Subject)
+
+                    @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="field">
+                    @Html.LabelFor(model => model.Message)
+
+                    @Html.TextAreaFor(model => model.Message, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Message, "", new {@class = "text-danger"})
+
+                </div>
+                <div class="field">
+                    @Html.Recaptcha(theme: Recaptcha.Web.RecaptchaTheme.Clean)
+                </div>
+                <br/>
+            </div>
+                <div class="login-actions">
+
+
+                    <input type="submit" value="Submit Request" class="button btn btn-success btn-large"  />
+
+
+                </div>
+          
+        }
+    </div>
+</div>

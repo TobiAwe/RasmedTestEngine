@@ -1,0 +1,56 @@
+﻿@model IEnumerable<RasmedTestEngine.Core.Entities.ExamQuestion>
+
+@{
+    ViewBag.Title = "Qustions";
+    int examId = int.Parse(ViewBag.ExamId.ToString());
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Qustion for @ViewBag.ExamName</h2>
+
+<p>
+    @Html.ActionLink("Add a new Question for this Exam", "AddQuestion", "WebAdmin", new {id = examId}, new { @class = "button btn btn-success btn-small" }) || 
+    @Html.ActionLink("Bulk Question Upload", "BulkQuestionDataUpload", new { id = examId }, new { @class = "button btn btn-success btn-small" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.QuestionContent)
+        </th>
+        <th>
+            Image
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuestionContent)
+            <ul>
+                @foreach (var option in item.ExamOptions)
+
+                {
+                    <ol>
+                        @option.OptionContent
+                    </ol>
+                }
+                @item.ExamAnswer.ExamOption.OptionContent
+
+            </ul>
+        </td>
+        <td>
+            @if (item.ImageData != null)
+            {
+                <img width="100" height="100" src="@Url.Action("GetQuestionImage", "WebAdmin", new {id=item.Id })" />
+            }
+
+        </td>
+        <td>
+            
+            @Html.ActionLink("DeleteQuestion", "DeleteQuestion", new { id=item.Id }, new { @class = "button btn btn-danger btn-small" })
+        </td>
+    </tr>
+}
+
+</table>

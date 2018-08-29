@@ -1,0 +1,105 @@
+﻿@model RasmedTestEngine.Website.Models.ReportSheet
+
+@{
+    ViewBag.Title = "ReportSheet";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int m = int.Parse(ViewBag.NeededExamId.ToString());
+
+}
+
+@*<h3>Report Sheet</h3>*@
+
+<h3>Test Name : @Model.ExamName </h3>
+
+<h3>Total Attempt : @Model.TotalAttempts </h3>
+
+@Html.ActionLink("Download Result", "ExportResult", new { Id = m }, new { @class = "btn btn-success btn-xs" }) 
+
+@if (Model.ResultList.Any())
+{
+    <table class="table">
+        <tr>
+            @*<th>
+
+               Full Name
+            </th>*@
+            <th>
+                E-Mail(Mobile Number)
+
+            </th>
+            <th>
+               Start Time
+            </th>
+            <th>
+                Expected End Time
+            </th>
+            <th>
+                Time Spent
+            </th>
+            <th>
+
+                Status
+            </th>
+            <th>
+
+                 Remark
+            </th>
+         
+        </tr>
+
+        @foreach (var item in Model.ResultList)
+        {
+            <tr>
+                @*<td>
+                    @item.MemberProfile.FullName
+                </td>*@
+                <td>
+                    @item.MemberProfile.Member.Email (@item.MemberProfile.Member.PhoneNumber)
+                </td>
+                <td>
+                   @item.StarTime.ToShortDateString()
+                      (@item.StarTime.ToShortTimeString())
+                </td>
+                <td>
+                    @item.ExpectedEndTime.ToShortDateString()
+                    (@item.ExpectedEndTime.ToShortTimeString())
+                </td>
+                <td>
+                    @if (item.EndTime != null)
+                    {
+                        @item.EndTime.ToString()
+
+
+                        {
+                            TimeSpan t = DateTime.Parse(item.EndTime.ToString()) - item.StarTime;
+                            <text>||</text> @t.Hours.ToString()
+                            <text>:</text>
+                            @t.Minutes.ToString()
+                             <text>:</text>
+                            @t.Seconds.ToString()
+
+
+                        }
+                    }
+                </td>
+
+                <td>
+                    @item.Status
+                </td>
+                <td>
+                    @Math.Round(Convert.ToDecimal(item.Remark), 2) % 
+                    
+                </td>
+                <td>
+                    @if (item.EndTime != null)
+                    {
+                        @Html.ActionLink("Result Details", "ResultDetails", new {id = item.Id})
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
+

@@ -1,0 +1,39 @@
+﻿@model RasmedTestEngine.Website.Models.SendCodeViewModel
+@{
+    ViewBag.Title = "Send";
+}
+
+
+
+<link href="~/css/pages/signin.css" rel="stylesheet" />
+
+<div class="account-container">
+
+    <div class="content clearfix">
+
+        @using (Html.BeginForm("SendCode", "Account", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            <h1>@ViewBag.Title</h1>
+            @Html.AntiForgeryToken()
+            @Html.Hidden("rememberMe", @Model.RememberMe)
+            @*<h4>Send verification code</h4>*@
+            <div class="login-fields">
+
+                Select Two-Factor Authentication Provider:
+                @Html.DropDownListFor(model => model.SelectedProvider, Model.Providers)
+            </div>
+            <div class="login-actions">
+                <input type="submit" value="Submit" class="button btn btn-primary btn-large" />
+            </div>
+         
+        }
+
+    </div> <!-- /content -->
+
+</div> <!-- /account-container -->
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

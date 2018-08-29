@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Rasmed Publications Limited Online Evaulation Systemn</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    @*<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">*@
+    <link href="~/css/font-awesome.css" rel="stylesheet">
+
+    <link href="~/css/style.css" rel="stylesheet">
+
+    <link href="~/css/support.css" rel="stylesheet" />
+
+    <link href="~/js/guidely/guidely.css" rel="stylesheet"> 
+    @*@Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")*@
+
+</head>
+<body>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                @Html.ActionLink("Rasmed Publications Online Evaulation System", "Index", "Home", new { area = "" }, new { @class = "brand" })
+
+                <div class="navbar">
+                    <ul class="nav pull-right">
+
+                        @Html.Partial("_LoginPartial")
+                    </ul>
+
+                    @*<form class="navbar-search pull-right">
+                        <input type="text" placeholder="Search" class="search-query">
+                    </form>*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="subnavbar">
+        <div class="subnavbar-inner">
+
+            <div class="container">
+                <ul class="mainnav">
+
+                    @if (!Request.IsAuthenticated)
+                    {
+
+                        <li>
+                            <a href="~/">
+                                <i class="icon-folder-open "></i>
+                                <span>Active Tests</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/Support">
+                                <i class="icon-comments-alt"></i>
+                                <span>Support</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="~/faq">
+                                <i class="icon-list-alt"></i>
+                                <span>F.A Q</span>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="~/">
+                                <i class="icon-folder-open "></i>
+                                <span> My Active Tests</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="~/MyResult">
+                                <i class="icon-list"></i>
+                                <span>My Results</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/Support">
+                                <i class="icon-comments-alt"></i>
+                                <span>Support</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="~/faq">
+                                <i class="icon-list-alt"></i>
+                                <span>F.A Q</span>
+                            </a>
+                        </li>
+
+                    }
+                </ul>
+            </div> <!-- /container -->
+
+        </div> <!-- /subnavbar-inner -->
+    </div>
+    <div class="main">
+
+        <div class="main-inner">
+
+            <div class="container">
+                @if (TempData["msg"] != null)
+                {
+                    <div class="Message">@TempData["msg"]</div>
+                }
+
+                
+
+                @RenderBody()
+
+            </div> <!-- /container -->
+
+        </div> <!-- /main-inner -->
+
+</div> <!-- /main -->
+
+    <div class="footer">
+
+        <div class="footer-inner">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="span12">
+                        &copy; @DateTime.Now.Year <a href="http://www.rasmedpublications.com/">Rasmed Publications Limited</a>.
+                    </div> <!-- /span12 -->
+
+                </div> <!-- /row -->
+
+            </div> <!-- /container -->
+
+        </div> <!-- /footer-inner -->
+
+    </div> <!-- /footer -->
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

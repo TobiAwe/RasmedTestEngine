@@ -1,0 +1,43 @@
+﻿@model IEnumerable<RasmedTestEngine.Core.Entities.Examination>
+@{
+    ViewBag.Title = "Home";
+}
+
+
+
+<div class="row">
+    <div class="span12">
+
+
+            @if (Model.Any())
+            {
+                foreach (var examination in Model)
+                {
+                    <div class="widget-content">
+
+                        <h1>@examination.Name</h1>
+
+                        <p>
+                            @Html.Raw(examination.Instruction)
+                        </p>
+                      @Html.ActionLink("Get Instruction","GetInstruction",null ,new {examId=examination.Id}, new {@class= "button btn btn-primary btn-large" })
+                    </div> <!-- /widget-content -->
+
+                }
+
+            }
+            else
+            {
+                <div class="widget-content">
+
+                    <h1>No Active Test</h1>
+
+                    <p>Kindly check back to see available Tests</p>
+                </div> <!-- /widget-content -->
+
+            }
+
+        </div> <!-- /widget -->
+
+    </div> <!-- /span12 -->
+

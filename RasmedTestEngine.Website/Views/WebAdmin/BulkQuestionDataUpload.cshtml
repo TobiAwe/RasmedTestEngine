@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Bulk Question Upload";
+    int exid = int.Parse(ViewBag.examId.ToString());
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h2>Bulk Question Upload for :@ViewBag.ExamName </h2>
+
+@using (Html.BeginForm("BulkQuestionDataUpload", "WebAdmin",
+                                                    FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    @Html.AntiForgeryToken()
+    @Html.Hidden("examId",exid)
+
+    <div class="form-horizontal">
+
+
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.Label("Excel File", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="questionFile" />
+            </div>
+        </div>
+
+
+            <p></p>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Upload Question List" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+
+}
+
+
+

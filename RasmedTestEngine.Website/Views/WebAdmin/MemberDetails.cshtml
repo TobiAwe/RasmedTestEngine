@@ -1,0 +1,103 @@
+﻿@model RasmedTestEngine.Core.Entities.MemberProfile
+
+@{
+    ViewBag.Title = "Member Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>MemberDetails</h2>
+
+<div>
+    <h4>MemberProfile</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Member.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Member.PhoneNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Member.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Member.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistrationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationDate)
+        </dd>
+
+    </dl>
+</div>
+<h4>List of roles for this user</h4>
+@if (ViewBag.RoleNames.Count == 0)
+{
+    <hr />
+    <p>No roles found for this user.</p>
+}
+
+<table class="table">
+
+    @foreach (var item in ViewBag.RoleNames)
+    {
+        <tr>
+            <td>
+                @item
+            </td>
+        </tr>
+    }
+</table>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Lock Out Enabled ?
+            </th>
+            <th>
+                Expiration(mm/dd/yyyy)
+            </th>
+
+        </tr>
+
+    </thead>
+    <tbody>
+        <tr>
+            <th>@Model.Member.LockoutEnabled</th>
+            <th>@Model.Member.LockoutEndDateUtc.ToString()</th>
+        </tr>
+    </tbody>
+
+</table>
+<p>
+      @Html.ActionLink("Promote to Admin", "PromoteToAdmin", new {id = Model.Member.Id, returnUrl = Request.Url.Query}, new { @class = "btn btn-success btn-xs" }) |
+
+      @Html.ActionLink("Remove From All Role", "RemoveFromAllRole", new { id = Model.Member.Id, returnUrl = Request.Url.Query }, new { @class = "btn btn-danger btn-xs" })
+
+    | @Html.ActionLink("Suspend User", "SuspendUser", new { id = Model.Member.Id, returnUrl = Request.Url.Query }, new { @class = "btn btn-danger btn-xs" })
+    | @Html.ActionLink("Remove Suspension", "UnSuspendUser", new { id = Model.Member.Id, returnUrl = Request.Url.Query }, new { @class = "btn btn-success btn-xs" })
+    | @Html.ActionLink("Back to List", "Member")
+</p>

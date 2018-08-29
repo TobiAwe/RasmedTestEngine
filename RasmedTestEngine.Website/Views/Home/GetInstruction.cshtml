@@ -1,0 +1,45 @@
+﻿@model RasmedTestEngine.Core.Entities.Examination
+
+@{
+    ViewBag.Title = "GetInstruction";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="span12">
+
+
+
+
+        <div class="widget-content">
+
+            <h1>Instruction for @Html.DisplayFor(model => model.Name)</h1>
+
+            <h3>Allowed Time : @Model.AllottedTime Minutes</h3>
+
+            <h3>Number of Questions : @Model.ExamQuestions.Count </h3>
+
+            <h3>Maximum number of Attempt : @Model.MaximumAttemptNumber</h3>
+
+
+            <p>@Html.Raw(Model.Instruction)</p>
+            **you may take the test any time it's convinient for you,But kindly note that you Must Complete the test once you start**<br />
+            **Once you start this test,you cannot pause till you finish,Please Click the start button to begin your Test**
+
+            <br /><br /><br />
+
+
+            @Html.ActionLink("Start Test", "StartTest", null, new { examId = Model.Id }, new { @class = "button btn btn-primary btn-large" })
+
+
+
+        </div> <!-- /widget-content -->
+
+
+    </div> <!-- /widget -->
+
+</div> <!-- /span12 -->
+
+
+

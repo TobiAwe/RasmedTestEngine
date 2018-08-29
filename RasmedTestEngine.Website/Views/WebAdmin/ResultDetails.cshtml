@@ -1,0 +1,48 @@
+﻿@model RasmedTestEngine.Core.Entities.ResultLog
+
+@{
+    ViewBag.Title = "ResultDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>ResultDetails</h2>
+
+<div>
+    <h4>ResultLog</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalCorrect)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalCorrect)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalWrong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalWrong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalUnanswered)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalUnanswered)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WrongQuestionandAnswerSelected)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.WrongQuestionandAnswerSelected)
+        </dd>
+
+    </dl>
+</div>
+

@@ -1,0 +1,35 @@
+﻿@model RasmedTestEngine.Website.Models.Testresultvm
+@{
+    ViewBag.Title = "Test Result";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="span12">
+
+
+
+
+        <div class="widget-content">
+
+            <h1>Test Result</h1>
+
+            <p> Total No of Correct Answers : @Model.Correct</p>
+
+            <p>
+                Total No of Wrong Answers : @Model.Wrong</p>
+
+            <p> Result : @Model.Outcome</p>
+
+            <p> Available No of Remainng Attempts :@Model.RemainingAttempt</p>
+
+            <br /> <br /> <br />
+</div> <!-- /widget-content -->
+
+
+    </div> <!-- /widget -->
+
+</div> <!-- /span12 -->
+
+
+

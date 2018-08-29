@@ -1,0 +1,199 @@
+﻿@model IEnumerable< RasmedTestEngine.Core.Entities.ExamQuestion>
+
+
+@{
+    ViewBag.Title = "Start Test";
+    int exmnm = int.Parse(@ViewBag.ExaminationId.ToString());
+Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .error {
+        color: #B94A48;
+    }
+
+    .hide {
+        display: none;
+    }
+</style>
+
+<div class="row">
+    <div class="span12">
+        <div class="widget-content">
+            <h2>Begin Test</h2>
+            <h4><b>You are to select the best ANSWER or NEAREST ANSWER from the provided options</b></h4>
+            Exam ends in <span id="timer" style="font-weight: bolder; color: red; font-size: 24px"></span> minutes!
+
+ 
+                @using (Html.BeginForm("SubmitTest", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.Hidden("TotalCount", Model.Count())
+                    @Html.Hidden("ExaminationId", exmnm)
+
+                    {
+                        var i = 1;
+                        foreach (var result in Model)
+                        {
+                            var nameOfRadio = "RDBTN" + result.Id;
+
+                            if (i == 1)
+                            {
+                                var questionId = "question" + @i.ToString("D2");
+                                var qnameId = "qname" + @i;
+                                var btnName1 = "next" + @i.ToString("D2");
+
+                                <div id='@questionId' class='cont'>
+                                    <p class='questions' id="@qnameId"> @i. @result.QuestionContent</p>
+                                    <p>
+                                        @if (result.ImageData != null)
+                                        {
+                                            <img width="100" height="100" src="@Url.Action("GetQuestionImage", "Home", new {result.Id})" />
+                                        }
+                                    </p>
+                                    <br>
+                                    @foreach (var options in result.ExamOptions)
+                                    {
+                                        <input type="radio" name=@Html.Raw(options.ExamQuestion.Id) value="@Html.Raw(options.Id)" />
+                                                                @options.OptionContent
+                                                                <br />
+                                    }
+                                    <br>
+                                    <button id='@btnName1' class='next btn btn-primary btn-large' type='button'>Next</button>
+                                </div>
+                            }
+                            else if (i < 1 || i < Model.Count())
+                            {
+                                var questionId = "question" + @i.ToString("D2");
+                                var qnameId = "qname" + @i;
+                                var btnName1 = "next" + @i.ToString("D2");
+                                var btnName2 = "pre" + @i.ToString("D2");
+
+                                <div id='@questionId' class='cont'>
+                                    <p class='questions' id="@qnameId"> @i. @result.QuestionContent</p>
+                                    <p>
+                                        @if (result.ImageData != null)
+                                        {
+                                            <img width="150" height="150" src="@Url.Action("GetQuestionImage", "Home", new {result.Id})" />
+                                        }
+                                    </p>
+                                    <br>
+                                    @foreach (var options in result.ExamOptions)
+                                    {
+                                        <input type="radio" name=@Html.Raw(options.ExamQuestion.Id) value="@Html.Raw(options.Id)" />
+                                                                @options.OptionContent
+                                                                <br />
+                                    }
+                                    <br>
+                                    <button id='@btnName2' class='previous btn btn-primary btn-large' type='button'>Previous</button>
+                                    <button id='@btnName1' class='next btn btn-primary btn-large' type='button'>Next</button>
+                                </div>
+
+                            }
+                            else if (i == Model.Count())
+                            {
+                                var questionId = "question" + @i.ToString("D2");
+                                var qnameId = "qname" + @i;
+                                var btnName1 = "next" + @i.ToString("D2");
+                                var btnName2 = "pre" + @i.ToString("D2");
+
+                                <div id='@questionId' class='cont'>
+                                    <p class='questions' id="@qnameId"> @i. @result.QuestionContent</p>
+                                    <p>
+                                        @if (result.ImageData != null)
+                                        {
+                                            <img width="100" height="100" src="@Url.Action("GetQuestionImage", "Home", new {result.Id})" />
+                                        }
+                                    </p>
+                                    <br>
+
+                                    @foreach (var options in result.ExamOptions)
+                                    {
+                                        <input type="radio" name=@Html.Raw(options.ExamQuestion.Id) value="@Html.Raw(options.Id)" />
+                                                                @options.OptionContent
+                                                                <br />
+                                    }
+                                    <br>
+                                    <button id='@btnName2' class='previous btn btn-primary btn-large' type='button'>Previous</button>
+                                    <button id='@btnName1' class='next btn btn-primary btn-large' type='submit'>Finish</button>
+                                </div>
+                            }
+                            i++;
+                        }
+                    }
+                }
+          
+            <br /><br />
+
+
+
+        </div> 
+    </div> 
+</div> 
+
+<script src="~/Scripts/jquery-2.2.0.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+
+<script>
+        $('.cont').addClass('hide');
+        count=$('.questions').length;
+        $('#question'+'01').removeClass('hide');
+
+        $(document).on('click','.next',function(){
+            element=$(this).attr('id');
+            last = parseInt(element.substr(element.length - 2),10);
+            pad = '0';
+            str = last + 1;
+            //nex=pad.substring(str.length) + str;
+            //nex=pad.substring(0,pad.length-str.length)+str;
+            nex = ('00' + str).slice(-2);
+            lst=('00' + last).slice(-2);
+            $('#question'+lst).addClass('hide');
+
+            $('#question'+nex).removeClass('hide');
+        });
+
+        $(document).on('click','.previous',function(){
+            element=$(this).attr('id');
+            last = parseInt(element.substr(element.length - 2),10);
+            str2 = last - 1;
+            //pre=last-1;
+            pre = ('00' + str2).slice(-2);
+            last2=('00' + last).slice(-2);
+
+            $('#question'+last2).addClass('hide');
+
+            $('#question'+pre).removeClass('hide');
+        });
+
+</script>
+
+<script>
+    window.onload = function(){
+        var hou = @(int.Parse(ViewBag.EndtimeMinutes.ToString()));
+        @*var sec = @(int.Parse(ViewBag.EndtimeSeconds.ToString()));*@
+        var sec = 59;
+        setInterval(function(){
+            var a = new Date();
+            document.getElementById("timer").innerHTML = hou +" : " + sec ;
+            sec--;
+            if(sec == 00)
+            {
+                hou--;
+                sec = 60;
+                if (hou == 0)
+                {
+                    hou = 0;
+                }
+            }
+        },1000);
+    }
+</script>
+
+<script>
+        setTimeout(function() {
+            $("form").submit();
+        }, @(int.Parse(ViewBag.EndtimeMilliSeconds.ToString())));
+</script>
+
+
+

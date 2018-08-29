@@ -1,0 +1,67 @@
+﻿@*@model IEnumerable<RasmedTestEngine.Core.Entities.Examination>*@
+@model PagedList.IPagedList<RasmedTestEngine.Core.Entities.Examination>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Examination";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Examination</h2>
+
+<p>
+    @Html.ActionLink("Add a New Exam", "AddExam", null, new {@class = "button btn btn-success btn-small"})
+</p>
+@using (Html.BeginForm("Examination", "WebAdmin", FormMethod.Get))
+{
+    <p>
+        Find by title: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+
+        <th>
+            Allotted Time(min)
+        </th>
+        <th>
+           Active ?
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.AllottedTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Active)
+        </td>
+        <td>
+            @Html.ActionLink("Edit Exam", "EditExam", new { id=item.Id }, new { @class = "btn btn-success btn-xs" }) |
+            @Html.ActionLink("Exam Details", "ExamDetails", new { id=item.Id}, new { @class = "btn btn-success btn-xs" }) |
+            @Html.ActionLink("Exam Question(s)", "Qustion", new { examId=item.Id }, new { @class = "btn btn-success btn-xs" }) |
+            @Html.ActionLink("Attach Eligible Users", "AddUsersToExam", new { examId = item.Id }, new { @class = "btn btn-success btn-xs" }) |
+           @Html.ActionLink("Delete Exam", "DeleteExam", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" }) |
+        </td>
+    </tr>
+}
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Examination",
+    new { page, currentFilter = ViewBag.CurrentFilter }))

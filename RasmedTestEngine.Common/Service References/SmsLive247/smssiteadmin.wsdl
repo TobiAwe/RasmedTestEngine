@@ -1,0 +1,903 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://smslive247.com/bulksms/service" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://smslive247.com/bulksms/service" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://smslive247.com/bulksms/service">
+      <s:element name="NewSiteUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="site_token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="User" type="tns:SMSSiteUserInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SMSSiteUserInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="owner_tx_id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateCreated" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ws_tx_id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Street" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CBalance" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserSettings" type="tns:UserInfo_settings" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserInfo_settings">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SenderID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Signature" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorEmail" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UseSignature" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeZone" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="NewSiteUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="NewSiteUserResult" type="tns:ResponseInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResponseInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExtraMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalSuccess" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalFailure" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalCharged" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CurrentBalance" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateSiteUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="site_token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="User" type="tns:SMSSiteUserInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateSiteUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateSiteUserResult" type="tns:ResponseInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteSiteUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="site_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteSiteUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteSiteUserResult" type="tns:ResponseInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllSiteUsers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="site_token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllSiteUsersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllSiteUsersResult" type="tns:ArrayOfSMSSiteUserInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSMSSiteUserInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SMSSiteUserInfo" type="tns:SMSSiteUserInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FlashSiteUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="site_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RecieverName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SMS_Count" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FlashSiteUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FlashSiteUserResult" type="tns:ResponseInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="site_id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LoginResult" type="tns:ResponseInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangePwd">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="site_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OldPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NewPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangePwdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ChangePwdResult" type="tns:ResponseInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Recharge">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="site_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="str16DigitCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RechargeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RechargeResult" type="tns:ResponseInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateAccountInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="site_token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="NewInfo" type="tns:SMSSiteInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SMSSiteInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ws_tx_id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateCreated" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="OwnerEmail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Prefix" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Suffix" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SentUrl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorUrl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SentEmail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorEmail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Callback" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CallbackActive" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="CallbackExpiry" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="CBalance" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalUsers" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remarks" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tag1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tag2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tag3" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateAccountInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateAccountInfoResult" type="tns:ResponseInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="site_token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetAccountInfoResult" type="tns:SMSSiteInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendSMS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="site_token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="NewSMS" type="tns:MessageInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MessageInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MessageID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="MessageType" type="tns:SMSTypeEnum" />
+          <s:element minOccurs="1" maxOccurs="1" name="MessageFolder" type="tns:MessageFolder" />
+          <s:element minOccurs="0" maxOccurs="1" name="CallBack" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Destination" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeliveryEmail" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SMSTypeEnum">
+        <s:restriction base="s:string">
+          <s:enumeration value="TEXT" />
+          <s:enumeration value="FLASH" />
+          <s:enumeration value="OLOGO" />
+          <s:enumeration value="RTONE" />
+          <s:enumeration value="VCARD" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="MessageFolder">
+        <s:restriction base="s:string">
+          <s:enumeration value="SENT_FOLDER" />
+          <s:enumeration value="SAVED_FOLDER" />
+          <s:enumeration value="BULK_SENT_FOLDER" />
+          <s:enumeration value="BULK_SAVED_FOLDER" />
+          <s:enumeration value="WEBSMS_SENT_FOLDER" />
+          <s:enumeration value="CUSTOM_SENT_FOLDER" />
+          <s:enumeration value="BULK_ISSENDING_FOLDER" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendSMSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SendSMSResult" type="tns:ResponseInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMessages">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="site_token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="from_date" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="to_date" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMessagesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMessagesResult" type="tns:ArrayOfSentMessageInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSentMessageInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SentMessageInfo" type="tns:SentMessageInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SentMessageInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="SendEndDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="SendStartDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalSms" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalSent" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalFailed" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="ShortMessage" type="tns:MessageInfo" />
+          <s:element minOccurs="1" maxOccurs="1" name="SendStatus" type="tns:SendStatusEnum" />
+          <s:element minOccurs="0" maxOccurs="1" name="SendStatusStr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OwnerEmail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ws_tx_id" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SendStatusEnum">
+        <s:restriction base="s:string">
+          <s:enumeration value="SENT" />
+          <s:enumeration value="SENDING" />
+          <s:enumeration value="PAUSED" />
+          <s:enumeration value="STOPPED" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="DeleteMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="site_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MessageID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteMessageResult" type="tns:ResponseInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertContact">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="site_token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="myContact" type="tns:ContactInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ContactInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Alias" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Mobile" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Groups" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="InsertContactResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="InsertContactResult" type="tns:ResponseInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateContact">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="site_token" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="myContact" type="tns:ContactInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateContactResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateContactResult" type="tns:ResponseInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteContact">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="site_token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MobileNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteContactResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteContactResult" type="tns:ResponseInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetContacts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="site_token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetContactsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetContactsResult" type="tns:ArrayOfContactInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfContactInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ContactInfo" type="tns:ContactInfo" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="NewSiteUserSoapIn">
+    <wsdl:part name="parameters" element="tns:NewSiteUser" />
+  </wsdl:message>
+  <wsdl:message name="NewSiteUserSoapOut">
+    <wsdl:part name="parameters" element="tns:NewSiteUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSiteUserSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateSiteUser" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSiteUserSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateSiteUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSiteUserSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteSiteUser" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSiteUserSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteSiteUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllSiteUsersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllSiteUsers" />
+  </wsdl:message>
+  <wsdl:message name="GetAllSiteUsersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllSiteUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="FlashSiteUserSoapIn">
+    <wsdl:part name="parameters" element="tns:FlashSiteUser" />
+  </wsdl:message>
+  <wsdl:message name="FlashSiteUserSoapOut">
+    <wsdl:part name="parameters" element="tns:FlashSiteUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangePwdSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangePwd" />
+  </wsdl:message>
+  <wsdl:message name="ChangePwdSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangePwdResponse" />
+  </wsdl:message>
+  <wsdl:message name="RechargeSoapIn">
+    <wsdl:part name="parameters" element="tns:Recharge" />
+  </wsdl:message>
+  <wsdl:message name="RechargeSoapOut">
+    <wsdl:part name="parameters" element="tns:RechargeResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateAccountInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateAccountInfo" />
+  </wsdl:message>
+  <wsdl:message name="UpdateAccountInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateAccountInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccountInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccountInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendSMSSoapIn">
+    <wsdl:part name="parameters" element="tns:SendSMS" />
+  </wsdl:message>
+  <wsdl:message name="SendSMSSoapOut">
+    <wsdl:part name="parameters" element="tns:SendSMSResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMessagesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMessages" />
+  </wsdl:message>
+  <wsdl:message name="GetMessagesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMessagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteMessage" />
+  </wsdl:message>
+  <wsdl:message name="DeleteMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertContactSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertContact" />
+  </wsdl:message>
+  <wsdl:message name="InsertContactSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertContactResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateContactSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateContact" />
+  </wsdl:message>
+  <wsdl:message name="UpdateContactSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateContactResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteContactSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteContact" />
+  </wsdl:message>
+  <wsdl:message name="DeleteContactSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteContactResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetContactsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetContacts" />
+  </wsdl:message>
+  <wsdl:message name="GetContactsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetContactsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SMSSiteAdminProxySoap">
+    <wsdl:operation name="NewSiteUser">
+      <wsdl:input message="tns:NewSiteUserSoapIn" />
+      <wsdl:output message="tns:NewSiteUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSiteUser">
+      <wsdl:input message="tns:UpdateSiteUserSoapIn" />
+      <wsdl:output message="tns:UpdateSiteUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSiteUser">
+      <wsdl:input message="tns:DeleteSiteUserSoapIn" />
+      <wsdl:output message="tns:DeleteSiteUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllSiteUsers">
+      <wsdl:input message="tns:GetAllSiteUsersSoapIn" />
+      <wsdl:output message="tns:GetAllSiteUsersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FlashSiteUser">
+      <wsdl:input message="tns:FlashSiteUserSoapIn" />
+      <wsdl:output message="tns:FlashSiteUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangePwd">
+      <wsdl:input message="tns:ChangePwdSoapIn" />
+      <wsdl:output message="tns:ChangePwdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Recharge">
+      <wsdl:input message="tns:RechargeSoapIn" />
+      <wsdl:output message="tns:RechargeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccountInfo">
+      <wsdl:input message="tns:UpdateAccountInfoSoapIn" />
+      <wsdl:output message="tns:UpdateAccountInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountInfo">
+      <wsdl:input message="tns:GetAccountInfoSoapIn" />
+      <wsdl:output message="tns:GetAccountInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendSMS">
+      <wsdl:input message="tns:SendSMSSoapIn" />
+      <wsdl:output message="tns:SendSMSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMessages">
+      <wsdl:input message="tns:GetMessagesSoapIn" />
+      <wsdl:output message="tns:GetMessagesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMessage">
+      <wsdl:input message="tns:DeleteMessageSoapIn" />
+      <wsdl:output message="tns:DeleteMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertContact">
+      <wsdl:input message="tns:InsertContactSoapIn" />
+      <wsdl:output message="tns:InsertContactSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContact">
+      <wsdl:input message="tns:UpdateContactSoapIn" />
+      <wsdl:output message="tns:UpdateContactSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteContact">
+      <wsdl:input message="tns:DeleteContactSoapIn" />
+      <wsdl:output message="tns:DeleteContactSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContacts">
+      <wsdl:input message="tns:GetContactsSoapIn" />
+      <wsdl:output message="tns:GetContactsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SMSSiteAdminProxySoap" type="tns:SMSSiteAdminProxySoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="NewSiteUser">
+      <soap:operation soapAction="http://smslive247.com/bulksms/service/NewSiteUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSiteUser">
+      <soap:operation soapAction="http://smslive247.com/bulksms/service/UpdateSiteUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSiteUser">
+      <soap:operation soapAction="http://smslive247.com/bulksms/service/DeleteSiteUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllSiteUsers">
+      <soap:operation soapAction="http://smslive247.com/bulksms/service/GetAllSiteUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FlashSiteUser">
+      <soap:operation soapAction="http://smslive247.com/bulksms/service/FlashSiteUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://smslive247.com/bulksms/service/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePwd">
+      <soap:operation soapAction="http://smslive247.com/bulksms/service/ChangePwd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Recharge">
+      <soap:operation soapAction="http://smslive247.com/bulksms/service/Recharge" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccountInfo">
+      <soap:operation soapAction="http://smslive247.com/bulksms/service/UpdateAccountInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountInfo">
+      <soap:operation soapAction="http://smslive247.com/bulksms/service/GetAccountInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSMS">
+      <soap:operation soapAction="http://smslive247.com/bulksms/service/SendSMS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessages">
+      <soap:operation soapAction="http://smslive247.com/bulksms/service/GetMessages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMessage">
+      <soap:operation soapAction="http://smslive247.com/bulksms/service/DeleteMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertContact">
+      <soap:operation soapAction="http://smslive247.com/bulksms/service/InsertContact" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContact">
+      <soap:operation soapAction="http://smslive247.com/bulksms/service/UpdateContact" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteContact">
+      <soap:operation soapAction="http://smslive247.com/bulksms/service/DeleteContact" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContacts">
+      <soap:operation soapAction="http://smslive247.com/bulksms/service/GetContacts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SMSSiteAdminProxySoap12" type="tns:SMSSiteAdminProxySoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="NewSiteUser">
+      <soap12:operation soapAction="http://smslive247.com/bulksms/service/NewSiteUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSiteUser">
+      <soap12:operation soapAction="http://smslive247.com/bulksms/service/UpdateSiteUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSiteUser">
+      <soap12:operation soapAction="http://smslive247.com/bulksms/service/DeleteSiteUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllSiteUsers">
+      <soap12:operation soapAction="http://smslive247.com/bulksms/service/GetAllSiteUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FlashSiteUser">
+      <soap12:operation soapAction="http://smslive247.com/bulksms/service/FlashSiteUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://smslive247.com/bulksms/service/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePwd">
+      <soap12:operation soapAction="http://smslive247.com/bulksms/service/ChangePwd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Recharge">
+      <soap12:operation soapAction="http://smslive247.com/bulksms/service/Recharge" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccountInfo">
+      <soap12:operation soapAction="http://smslive247.com/bulksms/service/UpdateAccountInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountInfo">
+      <soap12:operation soapAction="http://smslive247.com/bulksms/service/GetAccountInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSMS">
+      <soap12:operation soapAction="http://smslive247.com/bulksms/service/SendSMS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessages">
+      <soap12:operation soapAction="http://smslive247.com/bulksms/service/GetMessages" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMessage">
+      <soap12:operation soapAction="http://smslive247.com/bulksms/service/DeleteMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertContact">
+      <soap12:operation soapAction="http://smslive247.com/bulksms/service/InsertContact" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContact">
+      <soap12:operation soapAction="http://smslive247.com/bulksms/service/UpdateContact" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteContact">
+      <soap12:operation soapAction="http://smslive247.com/bulksms/service/DeleteContact" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContacts">
+      <soap12:operation soapAction="http://smslive247.com/bulksms/service/GetContacts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SMSSiteAdminProxy">
+    <wsdl:port name="SMSSiteAdminProxySoap" binding="tns:SMSSiteAdminProxySoap">
+      <soap:address location="http://www.smslive247.com/api/webservice/obsolete/smssiteadmin.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SMSSiteAdminProxySoap12" binding="tns:SMSSiteAdminProxySoap12">
+      <soap12:address location="http://www.smslive247.com/api/webservice/obsolete/smssiteadmin.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

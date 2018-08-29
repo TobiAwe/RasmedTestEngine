@@ -1,0 +1,46 @@
+﻿@model IEnumerable<RasmedTestEngine.Core.Entities.ResultManager>
+@{
+    ViewBag.Title = "My Result";
+}
+
+
+<div class="row">
+    <div class="span12">
+
+
+        @if (Model.Any())
+            {
+                foreach (var result in Model)
+                {
+                <div class="widget-content">
+
+                    <h1>@result.Examination.Name</h1>
+
+                    <p>
+                      Time Attempted:   @result.StarTime.ToShortDateString() @result.StarTime.ToShortTimeString() 
+                    </p>
+                    <p>
+                        @Math.Round(Convert.ToDecimal(result.Remark), 2) %  
+                    </p>
+
+                </div> <!-- /widget-content -->
+
+            }
+
+        }
+        else
+        {
+            <div class="widget-content">
+
+                <h1>No Active Result</h1>
+
+                <p>Kindly check back when you've successfully completed a test</p>
+            </div> <!-- /widget-content -->
+
+        }
+
+    </div> <!-- /widget -->
+
+</div> <!-- /span12 -->
+         
+

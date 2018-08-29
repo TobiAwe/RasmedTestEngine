@@ -1,0 +1,67 @@
+﻿@model RasmedTestEngine.Core.Entities.Examination
+
+@{
+    ViewBag.Title = "Exam Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Exam Details</h2>
+
+<div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Instruction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Instruction)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AllottedTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AllottedTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaximumAttemptNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaximumAttemptNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditExam", new { id = Model.Id }) |
+    @Html.ActionLink("Back to Examination List", "Examination")
+</p>

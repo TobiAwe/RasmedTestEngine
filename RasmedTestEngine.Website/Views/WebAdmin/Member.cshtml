@@ -1,0 +1,66 @@
+﻿@*@model IEnumerable<RasmedTestEngine.Core.Entities.MemberProfile>*@
+@model PagedList.IPagedList<RasmedTestEngine.Core.Entities.MemberProfile>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<p>
+    @Html.ActionLink("Add a Single Member", "AddNewMember", null, new {@class = "button btn btn-success btn-small"})
+    @Html.ActionLink("Upload Member in Bulk", "MemberBulkUpload", null, new {@class = "button btn btn-success btn-small"})
+</p>
+@using (Html.BeginForm("Member", "WebAdmin", FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+           Full Name
+        </th>
+        <th>
+            Mobile Number
+        </th>
+        <th>
+            E-Mail
+        </th>
+        <th>
+            Registration Date
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Member.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Member.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationDate)
+            </td>
+            <td>
+                @Html.ActionLink("Update Member", "UpdateMember", new {id = item.Member.Id}, new {@class = "btn btn-success btn-xs"})|
+                @Html.ActionLink("Member Details", "MemberDetails", new {id = item.Member.Id}, new {@class = "btn btn-success btn-xs"})
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Member",
+    new { page, currentFilter = ViewBag.CurrentFilter }))
